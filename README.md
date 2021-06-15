@@ -1,6 +1,6 @@
 
 
-# LearningR:practising awesomeness :)
+# LearningR:practising boringness...
 
 TODO:This is the practice editing on Github
 
