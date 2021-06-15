@@ -2,7 +2,7 @@
 
 # LearningR:practising awesomeness :)
 
-TODO: Give a brief description of what your project is about
+TODO:This is the practice editing on Github
 
 This project...
 
