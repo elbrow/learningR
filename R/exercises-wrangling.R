@@ -55,3 +55,59 @@ nhanes_small %>%
 nhanes_small %>%
     select(phys_active) %>%
     rename(physically_active = phys_active)
+
+#exercise 9.9 practice what we've learned
+nhanes_small %>%
+    select(tot_chol, bp_sys_ave, poverty)
+nhanes_small %>%
+    rename(diabetes_diagnosis_age = diabetes_age)
+#rename this with pipe function: select(nhanes_small, bmi, contains("age"))
+nhanes_small %>%
+    select(bmi, contains("age"))
+#rename with PIPE:physical_activity <- select(nhanes_small, phys_active_days, phys_active) rename(physical_activity, days_phys_active = phys_active_days)
+nhanes_small %>%
+    select(phys_active_days) %>%
+    rename(days_phys_active = phys_active_days)
+
+#filtering data
+nhanes_small %>%
+    filter(sex == "female")
+#participats that are not female
+nhanes_small %>%
+    filter(sex != "female")
+#participant who have bmi 25
+nhanes_small %>%
+    filter(bmi == "25")
+# Participants who have BMI equal to or more than 25
+nhanes_small %>%
+    filter(bmi >= "25")
+# When BMI is 25 AND sex is female
+nhanes_small %>%
+    filter(bmi == "25" & sex == "female")
+# When BMI is 25 OR sex is female
+nhanes_small %>%
+    filter(bmi == "25" | sex == "female")
+
+# Arranging data by age in ascending order
+nhanes_small %>%
+    arrange(age)
+nhanes_small %>%
+    arrange(sex)
+nhanes_small %>%
+    arrange(desc(age))
+# Arranging data by sex then age in ascending order
+nhanes_small %>%
+    arrange(sex, age)
+
+#9.12 transform or add columns
+nhanes_small %>%
+    mutate(height = height / 100)
+#or for new columns
+nhanes_small %>%
+    mutate(logged_height = log(height))
+#height as meters and then take the natural logarithm, it would be:
+nhanes_small %>%
+    mutate(height = height / 100, logged_height = log(height))
+#We can also have different values based on logic conditions using if_else() This means if physical active days are greater than 5, then yes will be in a new column (highly_active), or if less, it will be no.
+nhanes_small %>%
+    mutate(highly_active = if_else(phys_active_days >= 5, "yes", "no"))
