@@ -111,3 +111,8 @@ nhanes_small %>%
 #We can also have different values based on logic conditions using if_else() This means if physical active days are greater than 5, then yes will be in a new column (highly_active), or if less, it will be no.
 nhanes_small %>%
     mutate(highly_active = if_else(phys_active_days >= 5, "yes", "no"))
+#to save a new data set
+nhanes_update <- nhanes_small %>%
+    mutate(height = height / 100,
+           logged_height = log(height),
+           highly_active = if_else(phys_active_days >= 5, "Yes", "No"))
