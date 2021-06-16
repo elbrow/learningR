@@ -155,6 +155,7 @@ nhanes_small %>%
 #Saving datasets as files
 #saving data as an rda file in the data folder
 usethis::use_data(nhanes_small, overwrite = TRUE)
+<<<<<<< HEAD
 
 #exercise 9.18
 nhanes_small %>%
@@ -164,3 +165,5 @@ nhanes_small %>%
         mean_age = mean(age, na.rm = TRUE),
         max_age = max(age, na.rm = TRUE),
         min_age = min(age, na.rm = TRUE))
+=======
+>>>>>>> 9de0dea9064c91a2645a089d8dfaf2756fa479a7
