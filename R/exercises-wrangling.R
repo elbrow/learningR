@@ -140,3 +140,27 @@ nhanes_small %>%
 # 3.
 nhanes_small %>%
     summarise(median_age = median(age, na.rm = TRUE), median_phys_active_days = median(phys_active_days, na.rm = TRUE))
+
+#9.17 group by
+nhanes_small %>%
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rn = TRUE), mean_bmi = mean(bmi, na.rm = TRUE))
+
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>%
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rn = TRUE), mean_bmi = mean(bmi, na.rm = TRUE)) %>%
+    ungroup()
+
+#Saving datasets as files
+#saving data as an rda file in the data folder
+usethis::use_data(nhanes_small, overwrite = TRUE)
+
+#exercise 9.18
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>%
+    group_by(diabetes, sex) %>%
+    summarise(
+        mean_age = mean(age, na.rm = TRUE),
+        max_age = max(age, na.rm = TRUE),
+        min_age = min(age, na.rm = TRUE))
