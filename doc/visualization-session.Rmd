@@ -38,6 +38,7 @@ nhanes_tidied <- nhanes_small %>%
     filter(!is.na(diabetes))
 
 usethis::use_data(nhanes_tidied, overwrite = T)
+#or you can use drop_na(diabetes) on the orginal dataset
 
 ggplot(nhanes_tidied, aes(x = diabetes)) +
     geom_bar()
@@ -127,5 +128,69 @@ ggplot(nhanes_tidied, aes(x = diabetes, fill = phys_active)) +
 # 5. Poverty levels between those with or without diabetes
 ggplot(nhanes_tidied, aes(x = diabetes, y = poverty)) +
     geom_violin()
+```
+
+#Visualizing 3 or more variables
+
+```{r using-colour}
+# Plot systolic blood pressure in relation to sex and diabetes status
+nhanes_tidied %>%
+    ggplot(aes(x = sex, y = bp_sys_ave, colour = diabetes)) +
+    geom_boxplot()
+
+nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+    geom_point()
+
+# Plot BMI in relation to systolic blood pressure and diabetes status
+nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, colour = diabetes)) +
+    geom_point()
+```
+
+```{r using-faceting}
+nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave)) +
+    geom_point() +
+    facet_grid(cols = vars(diabetes))
+
+nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave)) +
+    geom_point() +
+    facet_grid(rows = vars(diabetes))
+
+#5 variables
+nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+    geom_point() +
+    facet_grid(rows = vars(diabetes), cols = vars(sex))
+    
+
+```
+
+#Exercise for changing colours
+
+```{r viridis-exercise-discrete-variables}
+# Barplot to work from, with two discrete variables
+base_barplot <- nhanes_tidied %>% 
+    ggplot(aes(x = diabetes, fill = sex)) +
+    geom_bar(position = position_dodge())
+
+base_barplot
+
+base_barplot +
+    scale_fill_viridis_d()
+
+base_barplot +
+    scale_fill_viridis_d(option = "D")
+
+# Scatterplot to work from, with three continuous variables
+base_scatterplot <- nhanes_tidied %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+    geom_point()
+
+base_scatterplot +
+    scale_colour_viridis_c(option = "H")
+
 ```
 
