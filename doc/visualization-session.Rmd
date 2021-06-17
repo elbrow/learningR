@@ -194,3 +194,42 @@ base_scatterplot +
 
 ```
 
+
+#Changing plot appearance
+
+```{r built-in-themes}
+# Create scatterplot to play with themes
+base_scatterplot2 <- base_scatterplot +
+    facet_grid(rows = vars(diabetes),
+               cols = vars(sex)) +
+    scale_color_viridis_c()
+
+# View the plot with the default theme
+base_scatterplot2 +
+    theme_bw()
+
+base_scatterplot2 +
+    theme_minimal()
+
+base_scatterplot2 +
+    theme_classic()
+
+base_scatterplot2 +
+    theme_get()
+
+# Set the theme for all subsequent plots
+theme_set(theme_minimal())
+
+```
+
+```{r labels}
+
+# Add plot title and change axis titles
+base_scatterplot2 +
+    labs(title = "BMI, systolic blood pressure, and age by diabetes and sex",
+         y = "Systolic Blood Pressure (mmHg)",
+         x = "BMI (kg/m2)")
+
+
+```
+
